@@ -219,18 +219,20 @@ services:
     image: aztecprotocol/aztec:latest
     restart: unless-stopped
     environment:
-      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
-      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      ETHEREUM_HOSTS: [ETHEREUM_RPC_URL]
+      L1_CONSENSUS_HOST_URLS: [CONSENSUS_BEACON_URL]
       DATA_DIRECTORY: /data
-      VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}
-      COINBASE: ${COINBASE}
-      P2P_IP: ${P2P_IP}
+      VALIDATOR_PRIVATE_KEY: [VALIDATOR_PRIVATE_KEY]
+      COINBASE: [WALLET ADDRESS]
+      P2P_IP: [DEVICE_IP]
       LOG_LEVEL: debug
     entrypoint: >
       sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network alpha-testnet --node --archiver --sequencer'
     ports:
       - 40400:40400/tcp
       - 40400:40400/udp
+      - 30303:30303/tcp
+      - 30303:30303/udp
       - 8080:8080
     volumes:
       - /root/.aztec/alpha-testnet/data/:/data
@@ -319,7 +321,7 @@ Replace `RPC_URL`, `your-validator-address` & 2x `your-validator-address`, then 
 ## 12. Verify Node's Peer ID:
 **Find your Node's Peer ID:**
 ```bash
-sudo docker logs $(docker ps -q --filter ancestor=aztecprotocol/aztec:latest | head -n 1) 2>&1 | grep -i "peerId" | grep -o '"peerId":"[^"]*"' | cut -d'"' -f4 | head -n 1
+sudo docker logs $(docker ps -q --filter ancestor=aztecprotocol/aztec:0.87.8 | head -n 1) 2>&1 | grep -i "peerId" | grep -o '"peerId":"[^"]*"' | cut -d'"' -f4 | head -n 1
 ```
 * This reveals your Node's Peer ID, Now search it on [Nethermind Explorer](https://aztec.nethermind.io/)
 * Note: It might takes some hours for your node to show up in Nethermind Explorer after it fully synced.
