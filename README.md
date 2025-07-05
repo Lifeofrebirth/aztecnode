@@ -8,7 +8,7 @@ A STEP by STEP guide on How to Run `Sequencer Node` on Aztec Network Testnet & E
 ## Roles Info
 Sequecner Nodes will receive a certain role for their contribution on Discord.
 
-After running and syncing your Sequencer node, You can go through [Get Role](https://github.com/0xmoei/aztec-network/blob/main/README.md#get-apprentice-discord-role) step.
+After running and syncing your Sequencer node, You can go through [Get Role](https://github.com/Lifeofrebirth/aztecnode/blob/main/README.md.md#get-apprentice-discord-role) step.
 
 ---
 
